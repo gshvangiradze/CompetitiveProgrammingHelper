@@ -1,0 +1,53 @@
+//Definition for a binary tree node.
+    public class TreeNode
+    {
+        //2,1,1,1,3,null,null,null,null,null,1
+        public TreeNode ConstructBinaryTree(int?[] arr)
+        {
+            TreeNode Tree = new TreeNode(val = (int)arr[0]);
+            List<TreeNode> currentlayerelements = new List<TreeNode>();
+            currentlayerelements.Add(Tree);
+            int currentindex = 1;
+
+            while (true)
+            {
+                List<TreeNode> nextlayerelements = new List<TreeNode>();
+
+                for (int i = 0; i < currentlayerelements.Count; i++)
+                {
+                    if (arr[currentindex] == null) currentlayerelements[i].left = null;
+                    else
+                    {
+                        currentlayerelements[i].left = new TreeNode ((int)arr[currentindex]);
+                        nextlayerelements.Add(currentlayerelements[i].left);
+                    }
+
+                    if (arr[currentindex + 1] == null) currentlayerelements[i].right = null;
+                    else
+                    {
+                        currentlayerelements[i].right = new TreeNode((int)arr[currentindex+1]);
+                        nextlayerelements.Add(currentlayerelements[i].right);
+                    }
+                    
+                    currentindex += 2;
+                    
+                    if (currentindex >= arr.Length)
+                    {
+                        return Tree;
+                    }
+                }
+                
+                currentlayerelements = nextlayerelements;
+            }
+            return Tree;
+        }
+        public int val;
+        public TreeNode left;
+        public TreeNode right;
+        public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
+        {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
