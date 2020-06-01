@@ -1,0 +1,28 @@
+public int[][] ConvertStringToJaggedArray(string s)
+            {
+                //example of s 
+                //[[4,3],[4,1],[4,0],[3,2],[3,1],[3,0],[2,1],[2,0],[1,0]]
+                //[1,4],[4,2],[0,1],[4,0],[0,2],[1,3],[0,1]
+
+                var ss = s.Split("],[");
+
+                if (s.Substring(0,2)=="[[")
+                {
+                    ss[0] = ss[0].Remove(0, 2);
+                    ss[ss.Length - 1] = ss[ss.Length - 1].Remove(ss[ss.Length - 1].Length - 2, 2);
+                }
+                else               
+                {
+                    ss[0] = ss[0].Remove(0, 1);
+                    ss[ss.Length - 1] = ss[ss.Length - 1].Remove(ss[ss.Length - 1].Length - 1, 1);
+                }
+
+                var res = new int[ss.Length][];
+                for (int i = 0; i < ss.Length; i++)
+                {
+                    var sss = ss[i].Split(",").Select(x => Convert.ToInt32(x)).ToArray();
+                    res[i] = sss;
+                }
+                return res;
+            }
+        }
